@@ -31,14 +31,15 @@ class Level:
         # update and draw the game
         self.visible_sprites.custom_draw()
         self.visible_sprites.update()
-        debug(self.player.direction)
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
         # general setup
         super().__init__()
         self.display_surface = pygame.display.get_surface()
+        self.offset = pygame.math.Vector2(100,200)
 
     def custom_draw(self):
         for sprite in self.sprites():
-            self.display_surface.blit(sprite.image, sprite.rect)
+            offset_pos = sprite.rect.topleft + self.offset
+            self.display_surface.blit(sprite.image, offset_pos)
