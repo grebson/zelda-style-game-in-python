@@ -42,8 +42,6 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
-        
-        print(self.animations)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -82,7 +80,15 @@ class Player(pygame.sprite.Sprite):
     def get_status(self):
         # idle status
         if self.direction.x == 0 and self.direction.y == 0:
-            self.status = self.status + '_idle'
+            if not 'idle' in self.status:
+                self.status = self.status + '_idle'
+
+        if self.attacking:
+            self.direction.x = 0
+            self.direction.y = 0
+
+            if not 'attack' in self.status:
+                self.status = self.status + '_attack'
 
     def move(self, speed):
         if self.direction.magnitude() != 0:
@@ -121,5 +127,5 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.input()
         self.cooldowns()
-        # self.get_status()
+        self.get_status()
         self.move(self.speed)
