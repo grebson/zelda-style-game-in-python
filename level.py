@@ -26,7 +26,8 @@ class Level:
         }
 
         images = {
-            'grass': import_folder('./images/grass')
+            'grass': import_folder('./images/grass'),
+            'objects': import_folder('./images/objects')
         }
 
         for style, layout in layouts.items():
@@ -42,7 +43,8 @@ class Level:
                             random_grass_image = choice(images['grass'])
                             Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'grass', random_grass_image)
                         if style == 'object':
-                            pass
+                            surface = images['objects'][int(col)]
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'object', surface)
 
         self.player = Player((2000,1430), [self.visible_sprites], self.obstacle_sprites)
 
