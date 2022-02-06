@@ -8,6 +8,9 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-26)
 
+        # images setup
+        self.import_player_assets()
+
         # movement
         self.direction = pygame.math.Vector2()
         self.speed = 5
@@ -16,7 +19,26 @@ class Player(pygame.sprite.Sprite):
         self.attack_time = None
 
         self.obstacle_sprites = obstacle_sprites
-        
+
+    def import_player_assets(self):
+        character_path = './images/player/'
+        self.animations = {
+            'up': [],
+            'down': [],
+            'left': [],
+            'right': [],
+            'right_idle': [],
+            'left_idle': [],
+            'up_idle': [],
+            'down_idle': [],
+            'right_attack': [],
+            'left_attack': [],
+            'up_attack': [],
+            'down_attack': []
+        }
+
+        for animation in self.animations.keys():
+            print(animation)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -81,7 +103,6 @@ class Player(pygame.sprite.Sprite):
         if self.attacking:
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.attacking = False
-
 
     def update(self):
         self.input()
