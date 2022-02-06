@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
         # magic input
         if keys[pygame.K_LCTRL] and not self.attacking:
             self.attacking = True
+            self.attack_time = pygame.time.get_ticks()
             print('do magic stuff')
 
     def move(self, speed):
