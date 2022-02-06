@@ -30,7 +30,7 @@ class Level:
                         y = row_index * TILESIZE
 
                         if style == 'boundary':
-                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'invisible')
+                            Tile((x,y), [self.obstacle_sprites], 'invisible')
 
         self.player = Player((2000,1430), [self.visible_sprites], self.obstacle_sprites)
 
