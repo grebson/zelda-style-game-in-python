@@ -7,6 +7,7 @@ from support import *
 from random import choice
 from weapon import Weapon
 from ui import UI
+from enemy import Enemy
 
 class Level:
     def __init__(self):
@@ -58,6 +59,8 @@ class Level:
                         if style == 'entities':
                             if col == '394':
                                 self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_attack, self.create_magic)
+                            else:
+                                Enemy('squid', (x,y), [self.visible_sprites])
 
     def create_attack(self):
         self.current_attack = Weapon(self.player, [self.visible_sprites])
