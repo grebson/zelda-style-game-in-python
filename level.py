@@ -31,6 +31,7 @@ class Level:
             'boundary': import_csv_layout('./map/map_FloorBlocks.csv'),
             'grass': import_csv_layout('./map/map_Grass.csv'),
             'object': import_csv_layout('./map/map_LargeObjects.csv'),
+            'entities': import_csv_layout('./map/map_Entities.csv')
         }
 
         images = {
@@ -54,7 +55,9 @@ class Level:
                             surface = images['objects'][int(col)]
                             Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'object', surface)
 
-        self.player = Player((2000,1430), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_attack, self.create_magic)
+                        if style == 'entities':
+                            if col == '394':
+                                self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_attack, self.create_magic)
 
     def create_attack(self):
         self.current_attack = Weapon(self.player, [self.visible_sprites])
