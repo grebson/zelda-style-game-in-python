@@ -51,6 +51,11 @@ class Player(Entity):
         self.exp = 123
         self.speed = self.stats['speed']
 
+        # damage timer
+        self.vulnerable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
+
     def import_player_assets(self):
         character_path = './images/player/'
         self.animations = {
@@ -167,6 +172,10 @@ class Player(Entity):
             if current_time - self.magic_switch_time >= self.switch_duration_cooldown:
                 self.can_switch_magic = True
 
+        if not self.vulnerable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                self.vulnerable = True
+
     def animate(self):
         animation = self.animations[self.status]
 
@@ -178,6 +187,9 @@ class Player(Entity):
         # set the image
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+        # flicker
+
 
     def get_full_weapon_damage(self):
         base_damage = self.stats['attack']
