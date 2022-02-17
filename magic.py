@@ -10,5 +10,8 @@ class MagicPlayer:
             player.health += strength
             player.energy -= cost
 
+            if player.health >= player.stats['health']:
+                player.health = player.stats['health']
+
     def flame(self):
         pass
